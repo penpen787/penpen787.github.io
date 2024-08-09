@@ -1,6 +1,7 @@
 ---
 title: 블로그 첫번째 글
 categories: [Daily Life]
+date: '2024-07-25'
 ---
 
 # 블로그 첫번째 글
