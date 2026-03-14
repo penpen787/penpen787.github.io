@@ -27,13 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Stage dialogues
   const dialogues = [
-    "Took apart a hard drive from my father's PC and found a totally sweet round mirror inside! RIP family data. Little did I know, this was my first hardware hack.",
-    "Majored in Architecture, but got sidetracked by Coding 101. Got suspiciously good at printing * star trees in C. Clearly, destiny had other plans.",
-    "Architecture promised a fat paycheck, but I chose a Computer Science minor instead. Decided to follow my heart... and embrace the bugs.",
-    "Managed the core system at an insurance company. Learned exactly how terrifying it is when millions depend on your code not crashing.",
-    "Leveled up and joined Naver! Handled a lovely internet service for 4 years. Turns out, scaling systems is just as hard as it sounds.",
-    "Loved my working holiday so much, I crossed the ocean to join Amazon Canada! Code works the same in English, but the coffee is different.",
-    "6+ years at Amazon Canada/US, and now facing the final boss: AI Engineering. From ruining hard drives to wrangling neural networks... quest accepted!"
+    "I took apart my father's hard drive and found a totally sweet round mirror inside! RIP family data, but hey—this was my first successful hardware hack.",
+    "I was an Architecture major until a 'Coding 101' class changed everything. Instead of blueprints, I started building star trees (*) in C. I realized then: building logic is way more addicting than building houses.",
+    "A stable path in Architecture or a bug-infested adventure in Software? I followed my heart into a CS minor. Quest accepted—bugs and all!",
+    "Managed the core system at an insurance company. I learned that knowing millions of users depend on your code is the best kind of caffeine.",
+    "Entered the NAVER dungeon! Spent 4 years mastering the art of high-traffic scaling. True growth happens when you're managing servers that never sleep.",
+    "I wanted to play in the big leagues with the world’s top engineers. That ambition led me to Amazon Canada—new continent, new challenges.",
+    "After 6+ years at Amazon, I’m facing the final boss: AI Engineering. The kid who once ruined hard drives is now training neural networks. Quest accepted!"
   ];
 
   // --- State ---
@@ -44,6 +44,7 @@ document.addEventListener('DOMContentLoaded', () => {
   let walkFrame      = false;   // false = standing, true = walking
   let typeInterval   = null;
   let facingLeft     = false;
+  let outroTimeout   = null; // For the staggered outro animation
 
   // ─────────────────────────────────────────────
   // Page height calculation
@@ -193,7 +194,31 @@ document.addEventListener('DOMContentLoaded', () => {
       if (outroProgress > 0.15) {
         dialogContainer.classList.remove('visible');
         stopWalking();
+        currentStage = -1; // Fix 8: Force re-trigger of stage dialog when scrolling back up
       }
+
+      // Handle the staggered animation for Part 2 of the Outro text
+      const outroPart2 = document.getElementById('outro-part-2');
+      if (outroProgress >= 1) {
+        if (!outroTimeout) {
+          outroTimeout = setTimeout(() => {
+            if (outroPart2) {
+              outroPart2.classList.remove('hidden-outro');
+              outroPart2.classList.add('show-outro');
+            }
+          }, 500); // Wait 0.5s after fully scrolled
+        }
+      } else {
+        if (outroTimeout) {
+          clearTimeout(outroTimeout);
+          outroTimeout = null;
+        }
+        if (outroPart2) {
+          outroPart2.classList.add('hidden-outro');
+          outroPart2.classList.remove('show-outro');
+        }
+      }
+
       return;
     }
 
@@ -201,6 +226,17 @@ document.addEventListener('DOMContentLoaded', () => {
     outroScene.classList.add('hidden');
     outroScene.style.opacity = 0;
     outroScene.style.pointerEvents = 'none';
+
+    // Also reset the inner outro state
+    if (outroTimeout) {
+      clearTimeout(outroTimeout);
+      outroTimeout = null;
+    }
+    const outroPart2 = document.getElementById('outro-part-2');
+    if (outroPart2) {
+      outroPart2.classList.add('hidden-outro');
+      outroPart2.classList.remove('show-outro');
+    }
 
     // ── Stage detection ────────────────────────
     // Use actual DOM offsets instead of fixed math since we added lead-in connector (Fix 3)

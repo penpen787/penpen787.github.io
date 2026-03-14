@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
   <title>Kyle's Journey to Software Engineer</title>
-  <meta name="description" content="An interactive 8-bit arcade journey through Kyle's career — from breaking hard drives to AI engineering.">
+  <meta name="description"
+    content="An interactive 8-bit arcade journey through Kyle's career — from breaking hard drives to AI engineering.">
   <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="style.css">
 </head>
+
 <body>
 
   <!-- Tall invisible scroll area -->
@@ -50,24 +53,29 @@
 
     <!-- Intro Scene -->
     <div id="intro-scene" class="screen-overlay">
-      <h1>Kyle's Journey to<br>Software Engineer</h1>
-      <p class="blink">▼ Scroll Down to Start ▼</p>
+      <h1>KYLE: THE HYBRID ARCHITECT<br>Solid Backend. Smart AI.</h1>
+      <p style="margin-bottom: 30px; color: #fff;">A new challenge awaits Player 1.</p>
+      <p class="blink">▼ scroll down to start adventure ▼</p>
     </div>
 
     <!-- Outro Scene -->
     <div id="outro-scene" class="screen-overlay hidden">
-      <h1>Quest Complete!</h1>
-      <p>Thanks for playing.</p>
-      <div class="outro-links">
-        <a href="https://www.linkedin.com/in/YOUR_LINKEDIN" target="_blank" rel="noopener">
-          <span class="link-icon">in</span> LinkedIn
-        </a>
-        <a href="https://github.com/penpen787" target="_blank" rel="noopener">
-          <span class="link-icon">◆</span> GitHub
-        </a>
-        <a href="/resume/kyle_resume.pdf" target="_blank" rel="noopener">
-          <span class="link-icon">▤</span> Resume
-        </a>
+      <div id="outro-part-1">
+        <p>Build successful. 0 errors, 0 warnings.</p>
+        <p>Coffee levels: Critical</p>
+        <p>Backend Quest Complete. Let's Deploy!</p>
+      </div>
+      <div id="outro-part-2" class="hidden-outro">
+        <p>...Wait, new Core unlocked: <span class="highlight-ai">[AI Engineering]</span></p>
+        <p>Initiating Neural Network Training...</p>
+        <div class="outro-links">
+          <a href="https://www.linkedin.com/in/khjeon/" target="_blank" rel="noopener">
+            <span class="link-icon">in</span> LinkedIn
+          </a>
+          <a href="https://github.com/penpen787" target="_blank" rel="noopener">
+            <span class="link-icon">◆</span> GitHub
+          </a>
+        </div>
       </div>
     </div>
 
@@ -75,4 +83,5 @@
 
   <script src="game.js"></script>
 </body>
+
 </html>
